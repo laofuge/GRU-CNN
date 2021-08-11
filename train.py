@@ -1,5 +1,5 @@
 from sentiment import Sentiment
-from model_fnn1 import Model # modify this line
+from model_fnn import Model # modify this line
 import tensorflow as tf 
 
 tf.app.flags.DEFINE_string("task", "np_chunking", "Task.")
