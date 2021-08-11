@@ -21,6 +21,8 @@ class Sentiment(object):
 		self.train_img_path = '../pic/pictrain/'
 		self.test_img_path = '../pic/pictest/'
 		self.labels_path = '../data/labels.txt'
+		self.trainlabels_path = '../data/trainlabel.txt'
+		self.testlabels_path = '../data/testlabel.txt'
 		# self.train_data_path = '../data/val_train.txt'
 		# self.test_data_path = '../data/val_validation.txt'
 		self.num_class = num_class
@@ -79,8 +81,8 @@ class Sentiment(object):
 		return labels, images
 
 	def load_data_CNN(self):
-		train_labels, train_images = self.deal_with_data_CNN(self.labels_path, self.train_img_path)
-		test_labels, test_images = self.deal_with_data_CNN(self.labels_path, self.test_img_path)
+		train_labels, train_images = self.deal_with_data_CNN(self.trainlabels_path, self.train_img_path)
+		test_labels, test_images = self.deal_with_data_CNN(self.testlabels_path, self.test_img_path)
 
 		self.train_set_CNN = list(zip(train_images, train_labels))
 		self.test_set_CNN = list(zip(test_images, test_labels))
@@ -113,18 +115,8 @@ class Sentiment(object):
 		return labels, images, docs1, docs2
 
 	def load_data_FNN(self):
-		train_labels, train_images, train_docs1, train_docs2 = self.deal_with_data_FNN(self.labels_path, self.train_img_path, self.train_data_path1, self.train_data_path2)
-		test_labels, test_images, test_docs1, test_docs2 = self.deal_with_data_FNN(self.labels_path, self.test_img_path, self.test_data_path1, self.test_data_path2)
+		train_labels, train_images, train_docs1, train_docs2 = self.deal_with_data_FNN(self.trainlabels_path, self.train_img_path, self.train_data_path1, self.train_data_path2)
+		test_labels, test_images, test_docs1, test_docs2 = self.deal_with_data_FNN(self.testlabels_path, self.test_img_path, self.test_data_path1, self.test_data_path2)
 
 		self.train_set_FNN = list(zip(train_docs1, train_docs2, train_images, train_labels))
 		self.test_set_FNN = list(zip(test_docs1, test_docs2, test_images, test_labels))
-# a=Sentiment(object)
-# print(a.deal_with_data_CNN('../data/labels.txt', '../pic/pictest/'))
-# with tf.Session() as sess:
-# 	img = tf.read_file('../pic/pictest/candle-1.jpg') #读取图片，
-# 	img_data = tf.image.decode_jpeg(img, channels=3) #解码
-# 	img_data = sess.run(tf.image.decode_jpeg(img, channels=3))
-# 	# img_data = sess.run(tf.image.rgb_to_grayscale(img_data)) #灰度化
-# 	print('大小：{}'.format(img_data.shape))
-# 	print("类型：%s" % type(img_data))
-# 	print(img_data)
